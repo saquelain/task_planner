@@ -1,0 +1,448 @@
+{
+  "info": {
+    "name": "Task Scheduler API",
+    "description": "Smart Task Scheduler with automatic slot allocation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Info",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "API Documentation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api",
+              "host": ["{{base_url}}"],
+              "path": ["api"]
+            }
+          }
+        },
+        {
+          "name": "Clear All Data (Dev Only)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dev/clear-all",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dev", "clear-all"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Task Management",
+      "item": [
+        {
+          "name": "Create Task - High Priority",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Prepare Presentation\",\n  \"estimatedDuration\": 120,\n  \"priority\": \"High\",\n  \"deadline\": \"2025-11-04T16:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks"]
+            }
+          }
+        },
+        {
+          "name": "Create Task - Medium Priority",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Code Review\",\n  \"estimatedDuration\": 90,\n  \"priority\": \"Medium\",\n  \"deadline\": \"2025-11-04T17:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks"]
+            }
+          }
+        },
+        {
+          "name": "Create Task - Low Priority",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Reply to Emails\",\n  \"estimatedDuration\": 60,\n  \"priority\": \"Low\",\n  \"deadline\": \"2025-11-04T18:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks"]
+            }
+          }
+        },
+        {
+          "name": "Create Fixed Task (Meeting)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Team Meeting\",\n  \"estimatedDuration\": 60,\n  \"priority\": \"High\",\n  \"deadline\": \"2025-11-04T15:00:00.000Z\",\n  \"isFixed\": true,\n  \"allocatedSlot\": {\n    \"startTime\": \"2025-11-04T14:00:00.000Z\",\n    \"endTime\": \"2025-11-04T15:00:00.000Z\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks"]
+            }
+          }
+        },
+        {
+          "name": "Get All Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks"]
+            }
+          }
+        },
+        {
+          "name": "Get Pending Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tasks/pending",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks", "pending"]
+            }
+          }
+        },
+        {
+          "name": "Get Task by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tasks/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "REPLACE_WITH_TASK_ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Task Status to Completed",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "REPLACE_WITH_TASK_ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tasks/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "REPLACE_WITH_TASK_ID"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recurring Tasks",
+      "item": [
+        {
+          "name": "Create Daily Recurring Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Daily Standup\",\n  \"estimatedDuration\": 15,\n  \"priority\": \"High\",\n  \"deadline\": \"2025-11-10T10:00:00.000Z\",\n  \"isRecurring\": true,\n  \"recurringPattern\": \"daily\",\n  \"numberOfDays\": 5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks/recurring",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks", "recurring"]
+            }
+          }
+        },
+        {
+          "name": "Create Weekly Recurring Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Weekly Team Sync\",\n  \"estimatedDuration\": 60,\n  \"priority\": \"Medium\",\n  \"deadline\": \"2025-12-01T15:00:00.000Z\",\n  \"isRecurring\": true,\n  \"recurringPattern\": \"weekly\",\n  \"numberOfDays\": 4\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks/recurring",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks", "recurring"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schedule Management",
+      "item": [
+        {
+          "name": "Generate Schedule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/schedule/generate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "schedule", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Reallocate Schedule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskId\": \"REPLACE_WITH_TASK_ID\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/schedule/reallocate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "schedule", "reallocate"]
+            }
+          }
+        },
+        {
+          "name": "Get Today's Schedule",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/schedule/today",
+              "host": ["{{base_url}}"],
+              "path": ["api", "schedule", "today"]
+            }
+          }
+        },
+        {
+          "name": "Get Full Schedule",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/schedule/full",
+              "host": ["{{base_url}}"],
+              "path": ["api", "schedule", "full"]
+            }
+          }
+        },
+        {
+          "name": "Clear All Schedules",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/schedule/clear",
+              "host": ["{{base_url}}"],
+              "path": ["api", "schedule", "clear"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get All Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/notifications",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications"]
+            }
+          }
+        },
+        {
+          "name": "Generate Reminders",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/reminders",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications", "reminders"]
+            }
+          }
+        },
+        {
+          "name": "Check Overdue Tasks",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/check-overdue",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications", "check-overdue"]
+            }
+          }
+        },
+        {
+          "name": "Mark Notification as Read",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/:id/read",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications", ":id", "read"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "REPLACE_WITH_NOTIFICATION_ID"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Demo Workflow",
+      "item": [
+        {
+          "name": "Step 1 - Create Urgent Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Urgent Client Call\",\n  \"estimatedDuration\": 30,\n  \"priority\": \"High\",\n  \"deadline\": \"2025-11-04T13:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tasks"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
