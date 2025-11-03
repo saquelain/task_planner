@@ -26,7 +26,7 @@ A backend service that intelligently manages tasks and automatically allocates t
 
 1. **Clone the repository**
 ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/saquelain/task_planner
    cd task-scheduler
 ```
 
