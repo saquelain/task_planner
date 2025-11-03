@@ -384,45 +384,8 @@ task-scheduler/
 
 ---
 
-## 🎯 Evaluation Criteria Coverage
-
-| Category | Implementation | Points |
-|----------|----------------|--------|
-| System Design & Architecture | Modular MVC, clear separation | 25/25 |
-| Scheduling Algorithm | Greedy with optimization | 30/30 |
-| Conflict Management | Overlap prevention, reallocation | 15/15 |
-| Code Quality | Clean, documented, validated | 10/10 |
-| API Design | RESTful, documented | 10/10 |
-| Scalability | Indexed queries, extensible | 10/10 |
-| **Bonus Features** | Recurring tasks, idle optimization | +10 |
-
----
-
-## 🚧 Future Enhancements
-
-- [ ] Multi-user support with authentication
-- [ ] WebSocket for real-time notifications
-- [ ] Machine learning for predictive scheduling
-- [ ] Calendar integration (Google Calendar, Outlook)
-- [ ] Task dependencies and subtasks
-- [ ] Time tracking and analytics
-
----
-
 ## 👨‍💻 Author
 
 **Your Name**
 - GitHub: [@saquelain](https://github.com/saquelain)
 - Email: saquelain1502@gmail.com
-
----
-
-## 📄 License
-
-MIT License - feel free to use this project for learning or portfolio purposes.
-
----
-
-## 🙏 Acknowledgments
-
-Built as part of the technical assessment for **Infollion Research Services Ltd**.
